@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Issue Tracker</h1>
+
+  <form [formGroup]="filterForm" class="filters">
+    <input type="text" formControlName="search" placeholder="Search by title...">
+    <select formControlName="status">
+      <option value="">All Statuses</option>
+      <option value="Open">Open</option>
+      <option value="InProgress">In Progress</option>
+      <option value="Done">Done</option>
+    </select>
+    <select formControlName="priority">
+      <option value="">All Priorities</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+    <input type="text" formControlName="assignee" placeholder="Assignee...">
+    <button type="button" class="create-btn" (click)="openCreateForm()">Create Issue</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Assignee</th>
+        <th>Last Updated</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let issue of issues" (click)="viewIssue(issue.id)">
+        <td>{{ issue.id.slice(0, 8) }}...</td>
+        <td>{{ issue.title }}</td>
+        <td>{{ issue.status }}</td>
+        <td>{{ issue.priority }}</td>
+        <td>{{ issue.assignee }}</td>
+        <td>{{ issue.updatedAt | date: 'short' }}</td>
+        <td>
+          <button (click)="openEditForm($event, issue)">Edit</button>
+        </td>
+      </tr>
+      <tr *ngIf="issues.length === 0">
+        <td colspan="7">No issues found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Conditionally render the form component as a modal -->
+<app-issue-form
+  *ngIf="isFormVisible"
+  [issue]="issueToEdit"
+  (issueSubmit)="handleFormSubmission($event)"
+  (close)="closeForm()"
+></app-issue-form>

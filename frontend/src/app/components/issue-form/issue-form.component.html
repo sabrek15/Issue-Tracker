@@ -1,0 +1,43 @@
+<div class="modal-overlay" (click)="closeForm()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ isEditMode ? 'Edit Issue' : 'Create New Issue' }}</h2>
+
+    <form [formGroup]="issueForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" formControlName="title">
+        <div *ngIf="issueForm.controls['title'].invalid && issueForm.controls['title'].touched" class="error-text">
+          Title is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option value="Open">Open</option>
+          <option value="InProgress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" formControlName="priority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="assignee">Assignee</label>
+        <input type="text" id="assignee" formControlName="assignee">
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="closeForm()">Cancel</button>
+        <button type="submit" class="btn-primary">{{ isEditMode ? 'Save Changes' : 'Create Issue' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

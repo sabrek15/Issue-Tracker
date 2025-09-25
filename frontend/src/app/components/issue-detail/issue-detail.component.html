@@ -1,0 +1,16 @@
+<div class="container">
+  <a routerLink="/issues" class="back-link">&larr; Back to Issues List</a>
+
+  <div *ngIf="isLoading">
+    <p>Loading issue details...</p>
+  </div>
+
+  <div *ngIf="error">
+    <p class="error">{{ error }}</p>
+  </div>
+
+  <div *ngIf="issue">
+    <h2>Issue Details: {{ issue.title }}</h2>
+    <pre>{{ issue | json }}</pre>
+  </div>
+</div>

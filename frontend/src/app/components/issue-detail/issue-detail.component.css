@@ -1,0 +1,27 @@
+.container {
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #007bff;
+  text-decoration: none;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+pre {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.error {
+  color: #dc3545;
+  font-weight: bold;
+}
